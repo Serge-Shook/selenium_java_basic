@@ -9,7 +9,6 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 
 import java.io.File;
-import java.util.List;
 
 import static org.junit.Assert.*;
 
@@ -26,6 +25,7 @@ public class Sample3Task {
         driver = new ChromeDriver();
 
         //open page:
+        driver.manage().window().maximize();
         driver.get("https://kristinek.github.io/site/examples/locators");
     }
 
@@ -39,7 +39,16 @@ public class Sample3Task {
     public void assertEqualsTask() throws Exception {
 //         TODO:
 //         check how many element with class "test" there are on page (5)
-//         check that value of second button is "This is also a button"
+        int numberOfTestElements = driver.findElements(By.className("test")).size();
+        assertEquals("Number of test elements", 5, numberOfTestElements);
+
+        //         check that value of second button is "This is also a button"
+//        WebElement secondButton = driver.findElements(By.tagName("button")).get(1);
+        WebElement secondButton = driver.findElement(By.id("buttonId"));
+        assertEquals(
+                "Text of second button",
+                "This is also a button",
+                secondButton.getAttribute("value"));
     }
 
     @Test
@@ -48,12 +57,21 @@ public class Sample3Task {
 //         check that it is True that value of second button is
 //         "this is Also a Button" if you ignore Caps Locks
 //         fail with custom error message:
+        WebElement secondButton = driver.findElement(By.id("buttonId"));
+        assertTrue(
+                "Second button text",
+                secondButton.getAttribute("value").equalsIgnoreCase("this is Also a Button"));
+
     }
 
     @Test
     public void assertFalseTask() throws Exception {
 //         TODO:
 //        check that it is False that value of second button is "This is a button"
+        WebElement secondButton = driver.findElement(By.id("buttonId"));
+        assertFalse(
+                "Second button text is not 'This is a button'",
+                secondButton.getAttribute("value").equals("This is a button"));
     }
 
     @Test
@@ -61,5 +79,9 @@ public class Sample3Task {
 //        TODO:
 //        check that none of items with class "test"
 //        contain number 190
+        for (WebElement testElement : driver.findElements(By.className("test"))) {
+            assertFalse("Contains 190", testElement.getText().contains("190"));
+        }
+
     }
 }

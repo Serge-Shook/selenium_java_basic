@@ -24,6 +24,7 @@ public class Sample4Task {
         System.setProperty("webdriver.chrome.driver", libWithDriversLocation + "chromedriver" + new selenium.ChangeToFileExtension().extension());
         // declaration above:
         driver = new ChromeDriver();
+        driver.manage().window().maximize();
         //open page:
         driver.get(base_url);
     }
@@ -46,6 +47,33 @@ public class Sample4Task {
 //        check that the button "Clear Result" is clickable now
 //        click on "Clear Result"
 //        check that the text is still (""), but it is not displayed
+
+        WebElement numberInput = driver.findElement(By.name("vfb-9"));
+        numberInput.clear();
+
+        String myNumber = "1001";
+        numberInput.sendKeys(myNumber);
+
+        WebElement clearResultNumberButton = driver.findElement(By.id("clear_result_button_number"));
+        assertFalse("Clear Result is not clickable", clearResultNumberButton.isEnabled());
+
+        WebElement resultMessage = driver.findElement(By.id("result_number"));
+        assertFalse("Result is not visible", resultMessage.isDisplayed());
+
+        WebElement resultNumberButton = driver.findElement(By.id("result_button_number"));
+        resultNumberButton.click();
+
+        assertTrue("Result is visible", resultMessage.isDisplayed());
+
+        String expectedResultMessage = String.format("You entered number: \"%s\"", myNumber);
+        assertEquals("Result message is correct", expectedResultMessage, resultMessage.getText());
+
+        assertTrue("Clear Result is clickable", clearResultNumberButton.isEnabled());
+
+        clearResultNumberButton.click();
+        assertEquals("Result message remained?", "", resultMessage.getText());
+        assertFalse("Result message is hidden", resultMessage.isDisplayed());
+
     }
 
     @Test
@@ -55,5 +83,12 @@ public class Sample4Task {
 //        click on "This is a link to Homepage"
 //        check that current url is not base_url
 //        verify that current url is homepage
+
+        assertEquals("Current URL", base_url, driver.getCurrentUrl());
+        driver.findElement(By.id("homepage_link")).click();
+        assertNotEquals("URL changed", base_url, driver.getCurrentUrl());
+
+        String homePage = "https://kristinek.github.io/site/";
+        assertEquals("Redirected to homepage", homePage, driver.getCurrentUrl());
     }
 }
