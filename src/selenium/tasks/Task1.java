@@ -112,7 +112,8 @@ public class Task1 {
             String actualMessage = alert.getText();
             alert.accept();
 
-            assertEquals(expectedMessage, actualMessage);
+            assertEquals("Correct result message", expectedMessage, actualMessage);
+            assertEquals("No error message","", driver.findElement(By.id("ch1_error")).getText());
         }
     }
 }
