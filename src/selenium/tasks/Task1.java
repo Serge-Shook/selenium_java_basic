@@ -95,7 +95,7 @@ public class Task1 {
 //        then check that correct no error is seen and check that square root is calculated correctly
         for (int i = 50; i <= 100; i++) { // check them all!!!
 
-            if ((int) Math.sqrt(i) * (int) Math.sqrt(i) == i) {
+            if ((int) Math.sqrt(i) == Math.sqrt(i)) {
                 System.out.println("testNumber = " + i + " was skipped");
                 continue;
             }
@@ -114,6 +114,5 @@ public class Task1 {
 
             assertEquals(expectedMessage, actualMessage);
         }
-
     }
 }
