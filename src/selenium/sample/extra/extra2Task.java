@@ -2,6 +2,7 @@ package selenium.sample.extra;
 
 import org.junit.After;
 import org.junit.Test;
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
@@ -25,7 +26,10 @@ public class extra2Task {
         driver = new FirefoxDriver();
 //        TODO
 //        go to page https://kristinek.github.io/site/examples/po
+        driver.get("https://kristinek.github.io/site/examples/po");
 //        check the background color of h1 element
+        String backgroundColor = driver.findElement(By.tagName("h1")).getCssValue("background-color");
+        System.out.println("backgroundColor of h1 element is: " + backgroundColor);
     }
 
     @Test
@@ -34,7 +38,10 @@ public class extra2Task {
         driver = new ChromeDriver();
 //        TODO
 //        go to page https://kristinek.github.io/site/examples/po
+        driver.get("https://kristinek.github.io/site/examples/po");
 //        check the background color of h1 element
+        String backgroundColor = driver.findElement(By.tagName("h1")).getCssValue("background-color");
+        System.out.println("backgroundColor of h1 element is: " + backgroundColor);
     }
 
     @Test
@@ -43,6 +50,9 @@ public class extra2Task {
         driver = new InternetExplorerDriver();
 //        TODO
 //        go to page https://kristinek.github.io/site/examples/po
+        driver.get("https://kristinek.github.io/site/examples/po");
 //        check the background color of h1 element
+        String backgroundColor = driver.findElement(By.tagName("h1")).getCssValue("background-color");
+        System.out.println("backgroundColor of h1 element is: " + backgroundColor);
     }
 }

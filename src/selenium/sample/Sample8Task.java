@@ -23,7 +23,7 @@ public class Sample8Task {
         System.setProperty("webdriver.chrome.driver", libWithDriversLocation + "chromedriver" + new selenium.ChangeToFileExtension().extension());
         // declaration above:
         driver = new ChromeDriver();
-
+        driver.manage().window().maximize();
         //open page:
         driver.get("https://kristinek.github.io/site/examples/po");
     }
@@ -39,6 +39,12 @@ public class Sample8Task {
 //         TODO:
 //        check the background of top 2 sections
 //        rgba(255, 221, 221, 1);
+        String backgroundColorOne = driver.findElement(By.className("w3-pale-red")).getCssValue("background-color");
+        assertEquals("rgba(255, 221, 221, 1)", backgroundColorOne);
+        String backgroundColorTwo = driver.findElement(By.className("w3-pale-yellow")).getCssValue("background-color");
+        assertEquals("rgba(255, 255, 204, 1)", backgroundColorTwo);
 //        check h1 element font-size 64px
+        String h1fontSize = driver.findElement(By.tagName("h1")).getCssValue("font-size");
+        assertEquals("64px", h1fontSize);
     }
 }

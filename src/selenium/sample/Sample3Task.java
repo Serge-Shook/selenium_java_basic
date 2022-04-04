@@ -20,7 +20,9 @@ public class Sample3Task {
     public void startingTests() throws Exception {
         // from Sample 1:
         String libWithDriversLocation = System.getProperty("user.dir") + File.separator + "lib" + File.separator;
-        System.setProperty("webdriver.chrome.driver", libWithDriversLocation + "chromedriver" + new selenium.ChangeToFileExtension().extension());
+        System.setProperty(
+                "webdriver.chrome.driver",
+                libWithDriversLocation + "chromedriver" + new selenium.ChangeToFileExtension().extension());
         // declaration above:
         driver = new ChromeDriver();
 
